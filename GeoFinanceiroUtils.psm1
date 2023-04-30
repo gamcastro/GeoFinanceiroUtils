@@ -26,8 +26,16 @@ Esse exemplo irá buscar no arquivo fatura .txt os gastos da categoria UBER,MATE
     [cmdletBinding()]
     param(
         [Parameter(Mandatory=$True)]
+        [ValidateScript({
+            if (Test-Path $_){
+                $True
+            } else {
+                Throw "Não existe o aquivo $_"
+            }
+})]
         [string]$FilePath,
 
+        [Parameter(Mandatory)]
         [string[]]$Filter
     )
     BEGIN{
