@@ -1,5 +1,5 @@
-function Get-GeoFaturaCartaoCredito{
-<#
+function Get-GeoFaturaCartaoCredito {
+    <#
 .SYNOPSIS
 Consulta informações na fatura do cartao de credito
 
@@ -25,47 +25,44 @@ Esse exemplo irá buscar no arquivo fatura .txt os gastos da categoria UBER,MATE
 #>
     [cmdletBinding()]
     param(
-        [Parameter(Mandatory=$True)]
-        [ValidateScript({
-            if (Test-Path $_){
-                $True
-            } else {
-                Throw "Não existe o aquivo $_"
-            }
-})]
+        [Parameter(Mandatory = $True)]       
+        [ValidateScript( {(Get-Content -Path $_ | Select-String -Pattern 'SISBB' -SimpleMatch -Quiet) -and (Test-Path -Path $_ -PathType Leaf)},ErrorMessage = "O arquivo não existe ou não é válido")]
+        [ValidatePattern("\.txt$",ErrorMessage="Não é um arquivo .txt")]       
         [string]$FilePath,
 
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory=$True)]
         [string[]]$Filter
     )
-    BEGIN{
+    BEGIN {
 
     }
-    PROCESS{
+    PROCESS {
         #busca no arquivo linha por linha o o que foi inserido no parametro $filter (Ex: 'UBER')
         Write-Verbose "Consultando o arquivo $FilePath"
-        foreach($filtro in $Filter){
-            $params=@{'Path'=$FilePath
-            'Pattern'=$filtro}
+        foreach ($filtro in $Filter) {
+            $params = @{'Path' = $FilePath
+                'Pattern'      = $filtro
+            }
 
             Write-Verbose "Processando o filtro $filtro"
             $valortotal = 0
-            try{
+            try {
                 Select-String  @params |
-            ForEach-Object {
+                ForEach-Object {
 
-                # Busca a parte do valor na string e troca a virgula pelo ponto
-                $valor = ($_.Line.Substring(62,7)).Replace(",",".")
-                $valor_m = $valor -as [decimal]
-                $valortotal = $valortotal + $valor_m
+                    # Busca a parte do valor na string e troca a virgula pelo ponto
+                    $valor = ($_.Line.Substring(62, 7)).Replace(",", ".")
+                    $valor_m = $valor -as [decimal]
+                    $valortotal = $valortotal + $valor_m
             
-            }
-            $props=@{'Categoria' = $filtro
-                    'Valor Total' = $valortotal}
+                }
+                $props = @{'Categoria' = $filtro
+                    'Valor Total'      = $valortotal
+                }
 
-            $obj = New-Object -TypeName psobject -Property $props
+                $obj = New-Object -TypeName psobject -Property $props
 
-            Write-Output $obj
+                Write-Output $obj
             }
             catch {
                 Write-Warning "Falha ao ler o arquivo $FilePath"
