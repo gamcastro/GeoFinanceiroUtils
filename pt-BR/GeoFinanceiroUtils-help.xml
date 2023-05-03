@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml" xmlns="http://msh">
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-GeoFaturaCartaoCredito</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>GeoFaturaCartaoCredito</command:noun>
+      <maml:description>
+        <maml:para>Consulta informações na fatura do cartao de credito</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Esse comando busca informações na fatura do cartão de credito. As informações são consultadas em um arquivo de texto contendo as operações do cartão de crédito em um mês específico. O usuário deverá informar o caminho do arquivo texto bem como uma categoria de gastos que deseja agrupar.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-GeoFaturaCartaoCredito</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>FilePath</maml:name>
+          <maml:description>
+            <maml:para>O caminho do arquivo texto onde encontra-se as informações de despesas do cartão de crédito</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>Filter</maml:name>
+          <maml:description>
+            <maml:para>O(s) tipos de gastos a qual deseja-se agrupar</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>SomaTotal</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill SomaTotal Description }}</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>FilePath</maml:name>
+        <maml:description>
+          <maml:para>O caminho do arquivo texto onde encontra-se as informações de despesas do cartão de crédito</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>Filter</maml:name>
+        <maml:description>
+          <maml:para>O(s) tipos de gastos a qual deseja-se agrupar</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>SomaTotal</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill SomaTotal Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-GeoFaturaCartaoCredito -FilePath C:\Downloads\fatura.txt -Filter 'UBER'
+Esse exemplo irá buscar no arquivo fatura.txt os gastos da categoria UBER</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>Get-GeoFaturaCartaoCredito -FilePath C:\Downloads\fatura.txt -Filter "UBER","MATEUS","IFOOD"</dev:code>
+        <dev:remarks>
+          <maml:para>Esse exemplo irá buscar no arquivo fatura .txt os gastos da categoria UBER,MATEUS e IFOOD</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+</helpItems>

@@ -1,28 +1,5 @@
 function Get-GeoFaturaCartaoCredito {
-    <#
-.SYNOPSIS
-Consulta informações na fatura do cartao de credito
 
-.DESCRIPTION
-Esse comando busca informações na fatura do cartão de credito. As informações são consultadas
-em um arquivo de texto contendo as operações do cartão de crédito em um mês específico.
-O usuário deverá informar o caminho do arquivo texto bem como uma categoria de gastos que deseja
-agrupar.
-
-.PARAMETER FilePath
-O caminho do arquivo texto onde encontra-se as informações de despesas do cartão de crédito
-
-.PARAMETER Filter
-O(s) tipos de gastos a qual deseja-se agrupar
-
-.EXAMPLE
-Get-GeoFaturaCartaoCredito -FilePath C:\Downloads\fatura.txt -Filter 'UBER'
-Esse exemplo irá buscar no arquivo fatura.txt os gastos da categoria UBER
-
-.EXAMPLE
-Get-GeoFaturaCartaoCredito -FilePath C:\Downloads\fatura.txt -Filter "UBER","MATEUS","IFOOD"
-Esse exemplo irá buscar no arquivo fatura .txt os gastos da categoria UBER,MATEUS e IFOOD
-#>
     [cmdletBinding()]
     param(
         [Parameter(Mandatory = $True)]       
@@ -31,7 +8,9 @@ Esse exemplo irá buscar no arquivo fatura .txt os gastos da categoria UBER,MATE
         [string]$FilePath,
 
         [Parameter(Mandatory=$True)]
-        [string[]]$Filter
+        [string[]]$Filter,
+
+        [switch]$SomaTotal
     )
     BEGIN {
 
@@ -62,6 +41,10 @@ Esse exemplo irá buscar no arquivo fatura .txt os gastos da categoria UBER,MATE
 
                 $obj = New-Object -TypeName psobject -Property $props
 
+                # if ($PSBoundParameters.ContainsKey('SomaTotal') {
+                #     $total = $obj | Measure-Object -Property 'Valor Total' -Sum
+                #     $props.Add('Total Geral',)
+                # }
                 Write-Output $obj
             }
             catch {
