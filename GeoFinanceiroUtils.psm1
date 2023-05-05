@@ -41,10 +41,7 @@ function Get-GeoFaturaCartaoCredito {
 
                 $obj = New-Object -TypeName psobject -Property $props
 
-                # if ($PSBoundParameters.ContainsKey('SomaTotal') {
-                #     $total = $obj | Measure-Object -Property 'Valor Total' -Sum
-                #     $props.Add('Total Geral',)
-                # }
+               
                 Write-Output $obj
             }
             catch {
