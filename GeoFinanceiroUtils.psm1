@@ -8,9 +8,7 @@ function Get-GeoFaturaCartaoCredito {
         [string]$FilePath,
 
         [Parameter(Mandatory=$True)]
-        [string[]]$Filter,
-
-        [switch]$SomaTotal
+        [string[]]$Filter
     )
     BEGIN {
 
